@@ -449,8 +449,6 @@
 			"enableMLAlerts": "[steps('analyticsRules').enableMLAlerts]",
 			"enableScheduledAlerts": "[steps('analyticsRules').enableScheduledAlerts]",
 			"rgName": "[basics('rgName')]",
-			"keyVaultName": "[steps('securityPermissions').keyVaultSection.keyVaultName]",
-            "managedId": "[steps('manualStep').managedIdDetails.idName]",
 			"ackEmail": "[basics('termsAck').emailAddress]",
 			"legalAccept": "[basics('termsAck').legalAccept]",
 			"validDomain": "[substring(basics('termsAck').emailAddress,indexOf(basics('termsAck').emailAddress,'@'),sub(length(basics('termsAck').emailAddress),sub(indexOf(basics('termsAck').emailAddress,'@'),1)))]",

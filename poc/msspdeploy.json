@@ -9,75 +9,7 @@
             },
             "defaultValue": "Difenda Managed Detection and Response"
         },
-        "mspOfferDescription": {
-            "type": "string",
-            "metadata": {
-                "description": "Name of the Managed Service Provider offering"
-            },
-            "defaultValue": "MSSP connection required by Difenda MDR services using Lighthouse"
-        },
-        "managedByTenantId": {
-            "type": "string",
-            "metadata": {
-                "description": "Specify the tenant id of the Managed Service Provider"
-            },
-            "defaultValue": "987a6d16-1c37-4bcc-b5f5-1a6091c3d7c9"
-        },
-        "authorizations": {
-            "type": "array",
-            "metadata": {
-                "description": "Specify an array of objects, containing tuples of Azure Active Directory principalId, a Azure roleDefinitionId, and an optional principalIdDisplayName. The roleDefinition specified is granted to the principalId in the provider's Active Directory and the principalIdDisplayName is visible to customers."
-            },
-            "defaultValue": [
-                {
-                    "principalId": "07543a0b-ceac-491a-93e7-a6b05a356475",
-                    "roleDefinitionId": "acdd72a7-3385-48ef-bd42-f606fba81ae7",
-                    "principalIdDisplayName": "Difenda C3-Operations - Resource Group Reader"
-                },
-                {
-                    "principalId": "07543a0b-ceac-491a-93e7-a6b05a356475",
-                    "roleDefinitionId": "8d289c81-5878-46d4-8554-54e1e3d8b5cb",
-                    "principalIdDisplayName": "Difenda C3-Operations - Azure Sentinel Reader"
-                },
-                {
-                    "principalId": "7cd00336-7cee-4c71-af56-bc54492ec546",
-                    "roleDefinitionId": "acdd72a7-3385-48ef-bd42-f606fba81ae7",
-                    "principalIdDisplayName": "Difenda C3-Platform - Resource Group Reader"
-                },
-                {
-                    "principalId": "7cd00336-7cee-4c71-af56-bc54492ec546",
-                    "roleDefinitionId": "87a39d53-fc1b-424a-814c-f7e04687dc9e",
-                    "principalIdDisplayName": "Difenda C3-Platform - Logic App Contributor"
-                },
-                {
-                    "principalId": "7cd00336-7cee-4c71-af56-bc54492ec546",
-                    "roleDefinitionId": "749f88d5-cbae-40b8-bcfc-e573ddc772fa",
-                    "principalIdDisplayName": "Difenda C3-Platform - Monitoring Contributor"
-                },
-                {
-                    "principalId": "7cd00336-7cee-4c71-af56-bc54492ec546",
-                    "roleDefinitionId": "92aaf0da-9dab-42b6-94a3-d43ce8d16293",
-                    "principalIdDisplayName": "Difenda C3-Platform - Log Analytics Contributor"
-                },
-                {
-                    "principalId": "7cd00336-7cee-4c71-af56-bc54492ec546",
-                    "roleDefinitionId": "ab8e14d6-4a74-4a29-9ba8-549422addade",
-                    "principalIdDisplayName": "Difenda C3-Platform - Azure Sentinel Contributor"
-                },
-                {
-                    "principalId": "7cd00336-7cee-4c71-af56-bc54492ec546",
-                    "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c",
-                    "principalIdDisplayName": "Difenda C3-DevOps - Resource Group Contributor"
-                }
-            ]
-        },
         "rgName": {
-            "type": "string"
-        },
-        "keyVaultName": {
-            "type": "string"
-        },
-        "managedId": {
             "type": "string"
         },
         "location": {
@@ -195,10 +127,7 @@
             "defaultValue": "https://raw.githubusercontent.com/Cespinoz019/CreateAzSentinel/main/mdr/"
         }
     },
-    "variables": {
-        "mspRegistrationName": "[guid(parameters('mspOfferName'))]",
-        "mspAssignmentName": "[guid(parameters('mspOfferName'))]"
-    },
+    "variables": {},
     "resources": [
         {
             "type": "Microsoft.Resources/resourceGroups",
@@ -284,42 +213,6 @@
                 }
             }
         },
-        // {
-        //     "name": "securityDefinitions",
-        //     "type": "Microsoft.Resources/deployments",
-        //     "apiVersion": "2020-06-01",
-        //     "resourceGroup": "[parameters('rgName')]",
-        //     "dependsOn": [
-        //         "[resourceId('Microsoft.Resources/resourceGroups',parameters('rgName'))]"
-        //     ],
-        //     "properties": {
-        //         "mode": "Incremental",
-        //         "templateLink": {
-        //             "uri": "[uri(parameters('_artifactsLocation'), 'security.json')]",
-        //             "contentVersion": "1.0.0.0"
-        //         },
-        //         "parameters": {
-        //             "rgName": {
-        //                 "value": "[parameters('rgName')]"
-        //             },
-        //             "location": {
-        //                 "value": "[parameters('location')]"
-        //             },
-        //             "keyVaultName": {
-        //                 "value": "[parameters('keyVaultName')]"
-        //             },
-        //             "managedId": {
-        //                 "value": "[parameters('managedId')]"
-        //             },
-        //             "subscription": {
-        //                 "value": "[parameters('subscription').subscriptionId]"
-        //             },
-        //             "tenantId": {
-        //                 "value": "[subscription().tenantId]"
-        //             }
-        //         }
-        //     }
-        // },
         {
             "condition": "[or(parameters('enableFusionAlert'),parameters('enableMicrosoftAlerts'),parameters('enableMLAlerts'))]",
             "name": "enableAlerts",
@@ -384,56 +277,11 @@
                 }
             }
         }
-        // {
-        //     "condition": "[not(empty(resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))))]",
-        //     "type": "Microsoft.ManagedServices/registrationDefinitions",
-        //     "apiVersion": "2019-06-01",
-        //     "name": "[variables('mspRegistrationName')]",
-        //     "properties": {
-        //         "registrationDefinitionName": "[parameters('mspOfferName')]",
-        //         "description": "[parameters('mspOfferDescription')]",
-        //         "managedByTenantId": "[parameters('managedByTenantId')]",
-        //         "authorizations": "[parameters('authorizations')]"
-        //     }
-        // },
-        // {
-        //     "condition": "[not(empty(resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))))]",
-        //     "type": "Microsoft.Resources/deployments",
-        //     "apiVersion": "2018-05-01",
-        //     "name": "rgAssignment",
-        //     "resourceGroup": "[parameters('rgName')]",
-        //     "dependsOn": [
-        //         "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))]",
-        //         "[resourceId('Microsoft.Resources/resourceGroups',parameters('rgName'))]"
-        //     ],
-        //     "properties": {
-        //         "mode": "Incremental",
-        //         "template": {
-        //             "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-        //             "contentVersion": "1.0.0.0",
-        //             "parameters": {},
-        //             "resources": [
-        //                 {
-        //                     "type": "Microsoft.ManagedServices/registrationAssignments",
-        //                     "apiVersion": "2019-06-01",
-        //                     "name": "[variables('mspAssignmentName')]",
-        //                     "properties": {
-        //                         "registrationDefinitionId": "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))]"
-        //                     }
-        //                 }
-        //             ]
-        //         }
-        //     }
-        // }
     ],
     "outputs": {
         "mspOfferName": {
             "type": "string",
             "value": "[concat('Managed by', ' ', parameters('mspOfferName'))]"
-        },
-        "authorizations": {
-            "type": "array",
-            "value": "[parameters('authorizations')]"
         },
         "workspaceName": {
             "type": "string",
@@ -446,10 +294,6 @@
         "subscription": {
             "type": "object",
             "value": "[parameters('subscription')]"
-        },
-        "managedId": {
-            "type": "string",
-            "value": "[parameters('managedId')]"
         }
     }
 }
