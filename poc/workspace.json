@@ -45,13 +45,6 @@
                 "description": "If set to true when changing retention to 30 days, older data will be immediately deleted. Use this with extreme caution. This only applies when retention is being set to 30 days."
             },
             "defaultValue": false
-        },
-        "location": {
-            "type": "string",
-            "metadata": {
-                "description": "Location for all resources."
-            },
-            "defaultValue": "[resourceGroup().location]"
         }
     },
     "functions": [],
@@ -65,7 +58,7 @@
             "name": "[parameters('workspaceName')]",
             "type": "Microsoft.OperationalInsights/workspaces",
             "apiVersion": "2015-11-01-preview",
-            "location": "[parameters('location')]",
+            "location": "[resourceGroup().location]",
             "properties": {
                 "retentionInDays": "[parameters('dataRetention')]",
                 "workspaceCapping": "[if(equals(parameters('dailyQuota'),0), json('null'), variables('quoatSetting'))]",
@@ -98,7 +91,7 @@
             "name": "[concat('SecurityInsights','(', parameters('workspaceName'),')')]",
             "type": "Microsoft.OperationsManagement/solutions",
             "apiVersion": "2015-11-01-preview",
-            "location": "[parameters('location')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.OperationalInsights/workspaces/', parameters('workspaceName'))]"
             ],
@@ -116,7 +109,7 @@
             "name": "[concat('BehaviorAnalyticsInsights','(', parameters('workspaceName'),')')]",
             "type": "Microsoft.OperationsManagement/solutions",
             "apiVersion": "2015-11-01-preview",
-            "location": "[parameters('location')]",
+            "location": "[resourceGroup().location]",
             "dependsOn": [
                 "[resourceId('Microsoft.OperationalInsights/workspaces/', parameters('workspaceName'))]"
             ],
