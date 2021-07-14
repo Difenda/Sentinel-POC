@@ -182,12 +182,6 @@
                     "workspaceName": {
                         "value": "[parameters('workspaceName')]"
                     },
-                    "tenantId": {
-                        "value": "[subscription().tenantId]"
-                    },
-                    "subscriptionId": {
-                        "value": "[subscription().subscriptionId]"
-                    },
                     "securityCollectionTier": {
                         "value": "[parameters('securityCollectionTier')]"
                     },
