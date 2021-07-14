@@ -155,9 +155,6 @@
                     },
                     "immediatePurgeDataOn30Days": {
                         "value": "[parameters('immediatePurgeDataOn30Days')]"
-                    },
-                    "location": {
-                        "value": "[resourceGroup().location]"
                     }
                 }
             }
@@ -196,9 +193,6 @@
                     },
                     "mcasDiscoveryLogs": {
                         "value": "[parameters('mcasDiscoveryLogs')]"
-                    },
-                    "location": {
-                        "value": "[resourceGroup().location]"
                     }
                 }
             }
@@ -225,9 +219,6 @@
                     },
                     "workspaceName": {
                         "value": "[parameters('workspaceName')]"
-                    },
-                    "location": {
-                        "value": "[resourceGroup().location]"
                     },
                     "enableFusionAlert":{
                         "value": "[parameters('enableFusionAlert')]"
