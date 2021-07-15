@@ -4,7 +4,6 @@
     "parameters": {
         "dataConnectorsKind": {
             "type": "array",
-            "defaultValue": [],
             "metadata": {
                 "description": "The kind of data connectors to enable"
             }
