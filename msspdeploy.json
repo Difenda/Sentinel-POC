@@ -107,7 +107,7 @@
             "metadata": {
                 "description": "The location of resources"
             },
-            "defaultValue": "https://raw.githubusercontent.com/Difenda/Sentinel-POC/main/poc/"
+            "defaultValue": "https://raw.githubusercontent.com/Difenda/Sentinel-POC/main/"
         },
         "location": {
             "type": "string",
