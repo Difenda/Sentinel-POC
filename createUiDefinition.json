@@ -6,7 +6,7 @@
 		"config": {
 			"isWizard":true,
 			"basics": {
-				"description": "**Azure Sentinel Difenda MDR** deployment, see more information about this project [here](https://www.difenda.com/MDR/).",
+				"description": "**Azure Sentinel Proof of Concept** deployment.",
 				"location": {
 					"label": "Location",
 					"toolTip": "Location for all resources",
@@ -41,7 +41,7 @@
 						"type": "Microsoft.Common.TextBlock",
 						"visible": true,
 						"options": {
-							"text": "By continuing with this deployment, I acknowledge I have read the Difenda MDR Service Terms and Conditions, also established in the Master Service Agreement and Statement of Work.",
+							"text": "By continuing with this deployment, I acknowledge I understand that some resources will be created in my subscription to carry on with the proof of concept.",
 							"link": {
 								"label":"Learn more",
 								"uri": "https://www.difenda.com/terms"
@@ -66,17 +66,17 @@
 						"name": "legalAccept",
 						"type": "Microsoft.Common.CheckBox",
 						"defaultValue": false,
-						"label": "I have read Difenda MDR service terms and conditions.",
+						"label": "I agree to create resources in my subscription.",
 						"constraints": {
 							"required": true,
-							"validationMessage": "Please acknowledge the terms and conditions."
+							"validationMessage": "Please agree with resource creation."
 						}
 					},
 					{
 						"type": "Microsoft.Common.TextBox",
 						"name": "companyName",
 						"label": "Company name:",
-						"toolTip": "Enter company name to be used by Difenda.",
+						"toolTip": "Enter company name.",
 						"constraints": {
 							"required": true,
 							"regex": "^[a-zA-Z]{4,10}$",
